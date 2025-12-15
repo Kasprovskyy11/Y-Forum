@@ -1,0 +1,1 @@
+Tu se pisz piotrek kodzik
