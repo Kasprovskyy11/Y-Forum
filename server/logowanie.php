@@ -36,7 +36,7 @@ if (!$login || !$password) {
 $stmt = $pdo->prepare("
     SELECT passworld, is_admin
     FROM users
-    WHERE username = ?
+    WHERE name = ?
     LIMIT 1
 ");
 $stmt->execute([$login]);
