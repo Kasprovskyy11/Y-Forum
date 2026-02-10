@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import CustomInput from "../components/forms/CustomInput";
 import CustomButton from "../components/forms/CustomButton";
 import YLogo from "../assets/YLogo.png";
@@ -18,6 +18,14 @@ function RouteComponent() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
+  const Router = useRouter();
+  // useEffect(() => {}, []);
+
+  if (localStorage.getItem("user")) {
+    Router.navigate({ to: "/" });
+  } else {
+    Router.navigate({ to: "/login" });
+  }
   const handleLogin = async () => {
     try {
       const response = await axios.post<LoginInterface>(
@@ -29,6 +37,8 @@ function RouteComponent() {
       );
 
       console.log(response.data);
+      localStorage.setItem("user", login);
+      Router.navigate({ to: "/" });
     } catch (error) {
       console.error("dupa blada", error);
     }

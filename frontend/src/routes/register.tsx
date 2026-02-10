@@ -53,7 +53,7 @@ function RouteComponent() {
           <>
             <div className="w-full flex flex-col justify-center gap-5">
               <CustomInput type="text" placeholder="username" />
-              <CustomInput type="text" placeholder="displayed username"/>
+              <CustomInput type="text" placeholder="displayed username" />
               <div className="flex justify-center items-center">
                 <img
                   src={photo || ProfilePhoto}
