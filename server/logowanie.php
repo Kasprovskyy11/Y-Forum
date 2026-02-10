@@ -55,8 +55,6 @@ try {
     exit;
 }
 
-error_log("Login: '$login', Password: '$password'");
-
 if (!$login || !$password) {
     error_log("Brak loginu lub hasła po obu metodach");
     echo json_encode(["success" => 0, "admin" => 0, "error" => "empty_fields"]);
@@ -79,8 +77,6 @@ if (!$user) {
     exit;
 }
 
-error_log("User znaleziony, hasło z bazy: '" . $user["password"] . "'");
-error_log("Hasło z formularza: '$password'");
 
 // ====== Sprawdzenie hasła ======
 if ($password === $user["password"]) {
