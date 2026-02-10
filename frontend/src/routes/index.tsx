@@ -1,5 +1,5 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
-import Post from "../components/forms/posts/Post";
+import Post from "../components/posts/Post";
 
 export const Route = createFileRoute("/")({
   component: Index,
