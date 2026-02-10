@@ -37,11 +37,7 @@ else {
 }
 
 // ====== Konfiguracja bazy ======
-$host = "localhost";
-$db   = "y_base";
-$user = "root";
-$pass = "";
-$charset = "utf8mb4";
+include 'dane_do_bazy.php';
 
 // ====== Połączenie PDO ======
 try {
