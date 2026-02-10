@@ -18,6 +18,7 @@ function Index() {
       username: "@adolf",
       text: "sajhsjaksjaksjakjskajsk ajksjaks ajkskajsk jkasjk ",
       photo: "/",
+
       likes: 123,
     },
     {

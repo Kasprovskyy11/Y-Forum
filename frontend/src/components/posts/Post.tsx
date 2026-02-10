@@ -3,6 +3,7 @@ interface PostProps {
   username: string;
   date?: Date;
   text: string;
+  profilePhoto?: string;
   photo: string;
   likes: number;
 }
@@ -13,6 +14,7 @@ export default function Post({
   date,
   text,
   photo,
+  profilePhoto,
   likes,
 }: PostProps) {
   return (
