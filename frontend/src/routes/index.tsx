@@ -1,4 +1,4 @@
-import { createFileRoute, Navigate, useRouter } from "@tanstack/react-router";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   component: Index,
