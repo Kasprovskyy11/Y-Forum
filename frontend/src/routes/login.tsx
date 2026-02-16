@@ -15,6 +15,7 @@ interface LoginInterface {
 }
 
 function RouteComponent() {
+  const Router = useRouter();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
@@ -35,7 +36,6 @@ function RouteComponent() {
           password: password,
         },
       );
-
       console.log(response.data);
       localStorage.setItem("user", login);
       Router.navigate({ to: "/" });

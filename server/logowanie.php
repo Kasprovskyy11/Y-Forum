@@ -37,11 +37,7 @@ else {
 }
 
 // ====== Konfiguracja bazy ======
-$host = "localhost";
-$db   = "y_base";
-$user = "root";
-$pass = "";
-$charset = "utf8mb4";
+include 'dane_do_bazy.php';
 
 // ====== Połączenie PDO ======
 try {
@@ -54,8 +50,6 @@ try {
     echo json_encode(["success" => 0, "admin" => 0, "error" => "db_connection"]);
     exit;
 }
-
-error_log("Login: '$login', Password: '$password'");
 
 if (!$login || !$password) {
     error_log("Brak loginu lub hasła po obu metodach");
@@ -79,8 +73,6 @@ if (!$user) {
     exit;
 }
 
-error_log("User znaleziony, hasło z bazy: '" . $user["password"] . "'");
-error_log("Hasło z formularza: '$password'");
 
 // ====== Sprawdzenie hasła ======
 if ($password === $user["password"]) {
