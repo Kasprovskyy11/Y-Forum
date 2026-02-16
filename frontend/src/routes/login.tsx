@@ -19,6 +19,14 @@ function RouteComponent() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
+  const Router = useRouter();
+  // useEffect(() => {}, []);
+
+  if (localStorage.getItem("user")) {
+    Router.navigate({ to: "/" });
+  } else {
+    Router.navigate({ to: "/login" });
+  }
   const handleLogin = async () => {
     try {
       const response = await axios.post<LoginInterface>(
@@ -29,10 +37,8 @@ function RouteComponent() {
         },
       );
       console.log(response.data);
-      if (response) {
-        localStorage.setItem("user", login);
-        Router.navigate({ to: "/" });
-      }
+      localStorage.setItem("user", login);
+      Router.navigate({ to: "/" });
     } catch (error) {
       console.error("dupa blada", error);
     }
