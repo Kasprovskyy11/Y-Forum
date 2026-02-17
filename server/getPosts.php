@@ -16,6 +16,7 @@ try {
 
 $stmt = $pdo->query("
     SELECT 
+        p.id_p AS id,
         u.name AS name,
         u.username AS username,
         u.profilowe AS profilePhoto,
@@ -34,11 +35,12 @@ $posts = [];
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
     $posts[] = [
-        "name" => $row["name"],                      // login
-        "username" => $row["username"],              // wyświetlana nazwa
+        "id" => (int)$row["id"],                    // <-- ID POSTA
+        "name" => $row["name"],
+        "username" => $row["username"],
         "date" => $row["date"],
         "text" => $row["text"],
-        "profilePhoto" => $row["profilePhoto"],      // zdjęcie profilowe
+        "profilePhoto" => $row["profilePhoto"],
         "photo" => $row["photo"],
         "likes" => (int)$row["likes"]
     ];
