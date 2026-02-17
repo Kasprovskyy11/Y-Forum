@@ -19,22 +19,20 @@ export default function PostLayout() {
 
   const [posts, setPosts] = useState<postInterface[]>([]);
   return (
-    <div className="flex flex-col items-center w-screen">
+    <div className="flex-1 overflow-y-auto flex flex-col items-center">
       {posts.length === 0 ? (
-        <p className="text-red-600">Brak postów</p>
+        <p className="text-red-600 mt-4">Brak postów</p>
       ) : (
-        posts.map((post) => {
-          return (
-            <Post
-              key={post.name + post.text}
-              name={post.name}
-              username={post.username}
-              text={post.text}
-              photo={post.photo}
-              likes={post.likes}
-            />
-          );
-        })
+        posts.map((post) => (
+          <Post
+            key={post.name + post.text}
+            name={post.name}
+            username={post.username}
+            text={post.text}
+            photo={post.photo}
+            likes={post.likes}
+          />
+        ))
       )}
     </div>
   );

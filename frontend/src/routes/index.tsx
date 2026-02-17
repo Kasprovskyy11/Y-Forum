@@ -18,7 +18,7 @@ function Index() {
   }, []);
 
   return (
-    <div className="">
+    <div className="flex flex-col h-screen">
       <MobileMain />
       <PostLayout />
     </div>

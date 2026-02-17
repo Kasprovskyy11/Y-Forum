@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export interface postInterface {
+  id: number;
   name: string;
   username: string;
   text: string;
