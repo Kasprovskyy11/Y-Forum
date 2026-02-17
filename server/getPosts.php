@@ -18,7 +18,6 @@ $stmt = $pdo->query("
     SELECT 
         u.name AS name,
         u.username AS username,
-        u.profilowe AS profilePhoto,
         p.text,
         p.date,
         p.likes,
@@ -38,7 +37,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         "username" => $row["username"],              // wyświetlana nazwa
         "date" => $row["date"],
         "text" => $row["text"],
-        "profilePhoto" => $row["profilePhoto"],      // zdjęcie profilowe
+        // "profilePhoto" => $row["profilePhoto"],      // zdjęcie profilowe
         "photo" => $row["photo"],
         "likes" => (int)$row["likes"]
     ];

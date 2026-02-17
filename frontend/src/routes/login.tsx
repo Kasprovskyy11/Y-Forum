@@ -18,8 +18,6 @@ function RouteComponent() {
   const Router = useRouter();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-
-  const Router = useRouter();
   // useEffect(() => {}, []);
 
   if (localStorage.getItem("user")) {
@@ -37,8 +35,12 @@ function RouteComponent() {
         },
       );
       console.log(response.data);
-      localStorage.setItem("user", login);
-      Router.navigate({ to: "/" });
+      if (response.data.success == 0) {
+        Router.navigate({ to: "/login" });
+      } else {
+        localStorage.setItem("user", login);
+        Router.navigate({ to: "/" });
+      }
     } catch (error) {
       console.error("dupa blada", error);
     }
@@ -59,7 +61,7 @@ function RouteComponent() {
         <div className="w-full flex flex-col justify-center gap-5">
           <CustomInput
             type="text"
-            placeholder="email"
+            placeholder="account name"
             onChangeFunction={handleLoginChange}
           />
           {/* <input type="text" onChange={handleLoginChange}></input> */}

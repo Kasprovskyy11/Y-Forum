@@ -1,5 +1,7 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import Post from "../components/posts/Post";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -10,6 +12,14 @@ function Index() {
   const Router = useRouter();
   if (!user) {
     Router.navigate({ to: "/login" });
+  }
+
+  interface postInterface {
+    name: string;
+    username: string;
+    text: string;
+    photo: string;
+    likes: number;
   }
 
   const postExamples = [
@@ -30,13 +40,36 @@ function Index() {
     },
   ];
 
+  const [posts, setPosts] = useState<postInterface[]>([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get("http://localhost/getPosts.php");
+        console.log(response);
+        console.log(response.data);
+        setPosts(response.data);
+      } catch (error) {
+        console.error("Failed to fetch posts:", error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
   return (
     <div className="">
       <h3>Jeśli tu jesteś to jesteś zalogowany jako {user}</h3>
       <div className="flex flex-col items-center w-screen">
-        {postExamples.map((post) => {
+        {posts.map((post) => {
           return (
-            <Post name={post.name} username={post.username} text={post.text} />
+            <Post
+              name={post.name}
+              username={post.username}
+              text={post.text}
+              photo={post.photo}
+              likes={post.likes}
+            />
           );
         })}
       </div>
