@@ -2,6 +2,7 @@ import { createFileRoute, useRouter } from "@tanstack/react-router";
 import Post from "../components/posts/Post";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import MobileMain from "../components/UI/MobileMain";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -22,24 +23,6 @@ function Index() {
     likes: number;
   }
 
-  const postExamples = [
-    {
-      name: "adolf",
-      username: "@adolf",
-      text: "sajhsjaksjaksjakjskajsk ajksjaks ajkskajsk jkasjk ",
-      photo: "/",
-
-      likes: 123,
-    },
-    {
-      name: "addam",
-      username: "@addamf",
-      text: "sasas ajksjaks ajkskajsk jkasjk ",
-      photo: "/",
-      likes: 123,
-    },
-  ];
-
   const [posts, setPosts] = useState<postInterface[]>([]);
 
   useEffect(() => {
@@ -59,7 +42,7 @@ function Index() {
 
   return (
     <div className="">
-      <h3>Jeśli tu jesteś to jesteś zalogowany jako {user}</h3>
+      <MobileMain />
       <div className="flex flex-col items-center w-screen">
         {posts.map((post) => {
           return (
