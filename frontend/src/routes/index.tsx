@@ -16,7 +16,7 @@ function Index() {
     if (!user) {
       Router.navigate({ to: "/login" });
     }
-  }, []);
+  }, [Router]);
 
   return (
     <div className="flex flex-col h-screen">

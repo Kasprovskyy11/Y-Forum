@@ -20,7 +20,7 @@ function RouteComponent() {
     if (localStorage.getItem("user")) {
       Router.navigate({ to: "/" });
     }
-  }, []);
+  }, [Router]);
 
   const handleLogin = async () => {
     try {
