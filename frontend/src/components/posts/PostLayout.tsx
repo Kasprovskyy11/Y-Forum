@@ -31,6 +31,7 @@ export default function PostLayout() {
             text={post.text}
             photo={post.photo}
             likes={post.likes}
+            date={post.date}
           />
         ))
       )}

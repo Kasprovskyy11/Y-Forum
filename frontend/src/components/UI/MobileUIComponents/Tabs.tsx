@@ -20,7 +20,9 @@ export default function Tabs({
     >
       <p>{text}</p>
       <div
-        className={`w-full h-1 bg-blue-600 rounded-2xl px-8 duration-300 ${activeState == id ? null : "opacity-0"}`}
+        className={`h-1 bg-blue-600 rounded-2xl w-full transform scale-x-0 origin-left transition-transform duration-300 ${
+          activeState === id ? "scale-x-100" : "scale-x-0"
+        }`}
       ></div>
     </div>
   );

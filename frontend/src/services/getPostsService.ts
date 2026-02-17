@@ -6,6 +6,7 @@ export interface postInterface {
   username: string;
   text: string;
   photo: string;
+  date: Date;
   likes: number;
 }
 
