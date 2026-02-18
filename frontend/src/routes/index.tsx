@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import MobileMain from "../components/UI/MobileMain";
 import PostLayout from "../components/posts/PostLayout";
 import LowerPanel from "../components/UI/MobileUIComponents/LowerPanel";
+import LeftPanel from "../components/UI/DesktopUI/LeftPanel";
+import RightPanel from "../components/UI/DesktopUI/RightPanel";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -19,10 +21,14 @@ function Index() {
   }, [Router]);
 
   return (
-    <div className="flex flex-col h-screen">
-      <MobileMain />
-      <PostLayout />
-      <LowerPanel />
+    <div className="flex flex-col h-screen items-center lg:grid lg:grid-cols-[1fr_3fr_1fr]">
+      <LeftPanel />
+      <div className="w-full flex flex-col h-screen items-center">
+        <MobileMain />
+        <PostLayout />
+        <LowerPanel />
+      </div>
+      <RightPanel />
     </div>
   );
 }

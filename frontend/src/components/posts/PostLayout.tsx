@@ -19,7 +19,7 @@ export default function PostLayout() {
 
   const [posts, setPosts] = useState<postInterface[]>([]);
   return (
-    <div className="flex-1 overflow-y-auto flex flex-col items-center">
+    <div className="flex-1 overflow-y-auto flex flex-col items-center md:w-full gap-6 p-6">
       {posts.length === 0 ? (
         <p className="text-red-600 mt-4">Brak postów</p>
       ) : (

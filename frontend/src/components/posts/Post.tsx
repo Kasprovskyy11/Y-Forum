@@ -29,7 +29,7 @@ export default function Post({
   }, [text]);
   return (
     <>
-      <div className="bg-black w-[80vw] max-h-[60vh] flex flex-col py-5">
+      <div className="bg-black w-[80vw] max-h-[60vh] md:w-2/3 flex flex-col py-5 border border-[#2F3336] rounded-2xl">
         <div className="h-[20%] flex justify-evenly items-center">
           <div className="bg-white rounded-full w-10 h-10"></div>
           <p className="text-white">{username}</p>
