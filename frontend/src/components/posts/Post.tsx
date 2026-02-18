@@ -5,7 +5,7 @@ interface PostProps {
   id: number;
   name: string;
   username: string;
-  date?: Date;
+  date?: string;
   text: string;
   profilePhoto?: string;
   photo: string;
@@ -31,6 +31,13 @@ export default function Post({
       setLongText(true);
     }
   }, [text]);
+
+//* Alternatywna forma: 
+// PostProps) {
+//   const Router = useRouter();
+//   const longText = text.length > 500;
+//   const altText = longText ? text.slice(0, 500) : text;
+//   return (
   return (
     <>
       <div
