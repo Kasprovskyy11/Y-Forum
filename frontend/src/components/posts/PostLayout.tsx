@@ -3,7 +3,13 @@ import { getPosts } from "../../services/getPostsService";
 import type { postInterface } from "../../services/getPostsService";
 import Post from "./Post";
 
-export default function PostLayout() {
+interface PostLayoutProps {
+  search: string;
+}
+
+export default function PostLayout({ search }: PostLayoutProps) {
+  const [posts, setPosts] = useState<postInterface[]>([]);
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -17,10 +23,28 @@ export default function PostLayout() {
     fetchPosts();
   }, []);
 
-  const [posts, setPosts] = useState<postInterface[]>([]);
   return (
     <div className="flex-1 overflow-y-auto flex flex-col items-center md:w-full gap-6 p-6">
-      {posts.length === 0 ? (
+      {search ? (
+        posts
+          .filter(
+            (post) =>
+              post.text.toLowerCase().includes(search.toLowerCase()) ||
+              post.name.toLowerCase().includes(search.toLowerCase()) ||
+              post.username.toLowerCase().includes(search.toLowerCase()),
+          )
+          .map((post) => (
+            <Post
+              key={post.name + post.text}
+              name={post.name}
+              username={post.username}
+              text={post.text}
+              photo={post.photo}
+              likes={post.likes}
+              date={post.date}
+            />
+          ))
+      ) : posts.length === 0 ? (
         <p className="text-red-600 mt-4">Brak postów</p>
       ) : (
         posts.map((post) => (

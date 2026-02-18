@@ -1,7 +1,11 @@
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function RightPanel() {
+interface PanelProps {
+  onChangeFunction: (e) => void;
+}
+
+export default function RightPanel({ onChangeFunction }: PanelProps) {
   return (
     <div className="h-full w-full border-l-2 border-[#D9D9D9] lg:flex flex-col items-center hidden">
       <div className="relative w-9/10 m-6">
@@ -13,6 +17,7 @@ export default function RightPanel() {
           type="text"
           placeholder="Search..."
           className="w-full h-8 rounded-full border border-[#D9D9D9] outline-none text-white p-2 pl-8"
+          onChange={onChangeFunction}
         />
       </div>
     </div>

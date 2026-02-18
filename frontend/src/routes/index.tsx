@@ -1,5 +1,5 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import MobileMain from "../components/UI/MobileMain";
 import PostLayout from "../components/posts/PostLayout";
 import LowerPanel from "../components/UI/MobileUIComponents/LowerPanel";
@@ -13,6 +13,8 @@ export const Route = createFileRoute("/")({
 function Index() {
   const Router = useRouter();
 
+  const [search, setSearch] = useState("");
+
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (!user) {
@@ -25,10 +27,14 @@ function Index() {
       <LeftPanel />
       <div className="w-full flex flex-col h-screen items-center">
         <MobileMain />
-        <PostLayout />
+        <PostLayout search={search} />
         <LowerPanel />
       </div>
-      <RightPanel />
+      <RightPanel
+        onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setSearch(e.target.value)
+        }
+      />
     </div>
   );
 }

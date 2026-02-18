@@ -39,7 +39,7 @@ export default function Post({
           </p>
           <p className="text-white opacity-60">...</p>
         </div>
-        <div className="h-[80%] text-white text-center py-5">
+        <div className="min-h-[80%] text-white text-center py-5 px-2 lg:p-5">
           {longText ? (
             <>
               <p>
