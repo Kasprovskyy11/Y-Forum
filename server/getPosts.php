@@ -23,7 +23,8 @@ $stmt = $pdo->query("
         p.text,
         p.date,
         p.likes,
-        i.path AS photo
+        i.path AS photo,
+        p.temat
     FROM posts p
     JOIN users u ON p.username = u.name
     LEFT JOIN images i ON p.image_id = i.id_image
@@ -42,7 +43,8 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         "text" => $row["text"],
         "profilePhoto" => $row["profilePhoto"],
         "photo" => $row["photo"],
-        "likes" => (int)$row["likes"]
+        "likes" => (int)$row["likes"],
+        "temat" => $post["temat"]
     ];
 }
 

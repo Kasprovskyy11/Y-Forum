@@ -35,7 +35,8 @@ $stmt = $pdo->prepare("
         p.text,
         p.date,
         p.likes,
-        i.path AS photo
+        i.path AS photo,
+        p.temat
     FROM posts p
     JOIN users u ON p.username = u.name
     LEFT JOIN images i ON p.image_id = i.id_image
@@ -59,5 +60,6 @@ echo json_encode([
     "text" => $post["text"],
     "profilePhoto" => $post["profilePhoto"],
     "photo" => $post["photo"],
-    "likes" => (int)$post["likes"]
+    "likes" => (int)$post["likes"],
+    "temat" => $post["temat"]
 ]);
