@@ -10,6 +10,18 @@ interface PostLayoutProps {
 export default function PostLayout({ search }: PostLayoutProps) {
   const [posts, setPosts] = useState<postInterface[]>([]);
 
+  // const postTemp = [
+  //   {
+  //     id: 1,
+  //     name: "test",
+  //     username: "testowy",
+  //     text: "lorem",
+  //     photo: "/",
+  //     // date: Date;,
+  //     likes: 123,
+  //   },
+  // ];
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -36,12 +48,13 @@ export default function PostLayout({ search }: PostLayoutProps) {
           .map((post) => (
             <Post
               key={post.name + post.text}
+              id={post.id}
               name={post.name}
               username={post.username}
               text={post.text}
               photo={post.photo}
               likes={post.likes}
-              date={post.date}
+              // date={post.date}
             />
           ))
       ) : posts.length === 0 ? (
@@ -50,12 +63,13 @@ export default function PostLayout({ search }: PostLayoutProps) {
         posts.map((post) => (
           <Post
             key={post.name + post.text}
+            id={post.id}
             name={post.name}
             username={post.username}
             text={post.text}
             photo={post.photo}
             likes={post.likes}
-            date={post.date}
+            // date={post.date}
           />
         ))
       )}
