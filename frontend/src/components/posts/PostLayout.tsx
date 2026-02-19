@@ -54,7 +54,7 @@ export default function PostLayout({ search }: PostLayoutProps) {
               text={post.text}
               photo={post.photo}
               likes={post.likes}
-              // date={post.date}
+              date={post.date}
             />
           ))
       ) : posts.length === 0 ? (
@@ -69,7 +69,7 @@ export default function PostLayout({ search }: PostLayoutProps) {
             text={post.text}
             photo={post.photo}
             likes={post.likes}
-            // date={post.date}
+            date={post.date}
           />
         ))
       )}
