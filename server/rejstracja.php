@@ -4,12 +4,6 @@ header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: POST");
 header("Content-Type: application/json");
 
-// Obsługa preflight request (OPTIONS)
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit();
-}
-
 // ====== konfiguracja bazy ======
 include 'dane_do_bazy.php';
 
@@ -19,33 +13,35 @@ try {
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]);
 } catch (Exception $e) {
-    echo json_encode(["success" => false, "error" => "Database connection failed"]);
+    echo json_encode(["success" => 0]);
     exit;
 }
 
-// ====== dane z Reacta (FormData) ======
-$email       = $_POST['email'] ?? "";
-$password    = $_POST['password'] ?? "";
-$birthDate   = $_POST['birth_date'] ?? "";  // birth_date w FormData
-$name        = $_POST['name'] ?? "";        // wyświetlana nazwa
-$username    = $_POST['username'] ?? "";     // login
+// ====== dane z Reacta ======
+$data = json_decode(file_get_contents("php://input"), true);
+
+$email       = $data["email"] ?? "";
+$password    = $data["password"] ?? "";
+$birthDate   = $data["birthDate"] ?? "";
+$login       = $data["login"] ?? "";         // to idzie do kolumny name
+$displayName = $data["displayName"] ?? "";   // to idzie do kolumny username
 
 // ====== walidacja ======
-if (!$email || !$password || !$birthDate || !$name || !$username) {
-    echo json_encode(["success" => false, "error" => "All fields are required"]);
+if (!$email || !$password || !$birthDate || !$login || !$displayName) {
+    echo json_encode(["success" => 0]);
     exit;
 }
 
 // ====== sprawdzenie czy login lub email już istnieje ======
 $stmt = $pdo->prepare("
-    SELECT username FROM users
-    WHERE username = ? OR email = ?
+    SELECT name FROM users
+    WHERE name = ? OR email = ?
     LIMIT 1
 ");
-$stmt->execute([$username, $email]);
+$stmt->execute([$login, $email]);
 
 if ($stmt->fetch()) {
-    echo json_encode(["success" => false, "error" => "User already exists"]);
+    echo json_encode(["success" => 0]); // użytkownik istnieje
     exit;
 }
 
@@ -55,29 +51,20 @@ $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 // ====== dodanie użytkownika ======
 $stmt = $pdo->prepare("
     INSERT INTO users
-    (name, username, email, password, birth_date, register_date, is_admin)
+    (name, username, email, passworld, birth_date, register_date, is_admin)
     VALUES (?, ?, ?, ?, ?, CURDATE(), 0)
 ");
 
-try {
-    $success = $stmt->execute([
-        $name,        // name = wyświetlana nazwa
-        $username,    // username = login
-        $email,
-        $hashedPassword,
-        $birthDate
-    ]);
-    
-    if ($success) {
-        echo json_encode(["success" => true, "message" => "Registration successful"]);
-    } else {
-        echo json_encode(["success" => false, "error" => "Registration failed"]);
-    }
-} catch (PDOException $e) {
-    // To pomoże zdiagnozować problemy z bazą danych
-    echo json_encode([
-        "success" => false, 
-        "error" => "Database error: " . $e->getMessage()
-    ]);
+$success = $stmt->execute([
+    $login,        // name = login
+    $displayName,  // username = wyświetlana nazwa
+    $email,
+    $hashedPassword,
+    $birthDate
+]);
+
+if ($success) {
+    echo json_encode(["success" => 1]);
+} else {
+    echo json_encode(["success" => 0]);
 }
-?>

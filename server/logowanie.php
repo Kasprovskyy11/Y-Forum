@@ -75,7 +75,7 @@ if (!$user) {
 
 
 // ====== Sprawdzenie hasła ======
-if (password_verify($password, $user["password"])) {
+if ($password === $user["password"]) {
     error_log("Hasło OK!");
     echo json_encode([
         "success" => 1,

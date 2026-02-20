@@ -1,78 +1,40 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
-import Post from "../components/posts/Post";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import MobileMain from "../components/UI/MobileMain";
+import PostLayout from "../components/posts/PostLayout";
+import LowerPanel from "../components/UI/MobileUIComponents/LowerPanel";
+import LeftPanel from "../components/UI/DesktopUI/LeftPanel";
+import RightPanel from "../components/UI/DesktopUI/RightPanel";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
 function Index() {
-  const user = localStorage.getItem("user");
   const Router = useRouter();
-  if (!user) {
-    Router.navigate({ to: "/login" });
-  }
 
-  interface postInterface {
-    name: string;
-    username: string;
-    text: string;
-    photo: string;
-    likes: number;
-  }
-
-  const postExamples = [
-    {
-      name: "adolf",
-      username: "@adolf",
-      text: "sajhsjaksjaksjakjskajsk ajksjaks ajkskajsk jkasjk ",
-      photo: "/",
-
-      likes: 123,
-    },
-    {
-      name: "addam",
-      username: "@addamf",
-      text: "sasas ajksjaks ajkskajsk jkasjk ",
-      photo: "/",
-      likes: 123,
-    },
-  ];
-
-  const [posts, setPosts] = useState<postInterface[]>([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await axios.get("http://localhost/getPosts.php");
-        console.log(response);
-        console.log(response.data);
-        setPosts(response.data);
-      } catch (error) {
-        console.error("Failed to fetch posts:", error);
-      }
-    };
-
-    fetchPosts();
-  }, []);
+    const user = localStorage.getItem("user");
+    if (!user) {
+      Router.navigate({ to: "/login" });
+    }
+  }, [Router]);
 
   return (
-    <div className="">
-      <h3>Jeśli tu jesteś to jesteś zalogowany jako {user}</h3>
-      <div className="flex flex-col items-center w-screen">
-        {posts.map((post) => {
-          return (
-            <Post
-              name={post.name}
-              username={post.username}
-              text={post.text}
-              photo={post.photo}
-              likes={post.likes}
-            />
-          );
-        })}
+    <div className="flex flex-col h-screen items-center lg:grid lg:grid-cols-[1fr_3fr_1fr]">
+      <LeftPanel />
+      <div className="w-full flex flex-col h-screen items-center">
+        <MobileMain />
+        <PostLayout search={search} />
+        <LowerPanel />
       </div>
+      <RightPanel
+        onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setSearch(e.target.value)
+        }
+      />
     </div>
   );
 }
