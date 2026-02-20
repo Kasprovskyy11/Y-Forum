@@ -6,10 +6,8 @@ export interface PostData {
   name: string;
   username: string;
   text: string;
-  photo: string | null;
-  profilePhoto: string;
-  temat: string;
-  date: string;
+  photo: string;
+  date: string; // ← zmień z Date na string
   likes: number;
 }
 

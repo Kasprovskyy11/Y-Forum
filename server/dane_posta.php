@@ -38,7 +38,7 @@ $stmt = $pdo->prepare("
         i.path AS photo,
         p.temat
     FROM posts p
-    JOIN users u ON p.username = u.name
+    JOIN users u ON p.name = u.name
     LEFT JOIN images i ON p.image_id = i.id_image
     WHERE p.id_p = ?
     LIMIT 1

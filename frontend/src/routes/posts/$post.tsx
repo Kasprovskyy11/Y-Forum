@@ -14,6 +14,7 @@ function PostPage() {
     const fetchPostData = async () => {
       try {
         const postData: PostData = await getPostData(post);
+        console.log(post);
         console.log(postData);
         setData(postData);
       } catch (error) {
