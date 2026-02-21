@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import DeepSeek from "../../../assets/deepseek.png";
 import YLogo from "../../../assets/YLogo.png";
+import { Link } from "@tanstack/react-router";
 
 export default function LeftPanel() {
   return (
@@ -9,10 +10,12 @@ export default function LeftPanel() {
       <img src={YLogo} className="p-6 w-24" />
       <div className="flex flex-col justify-evenly items-start text-white text-3xl h-1/3 p-6">
         <div className="cursor-pointer flex items-center gap-4 w-full">
-          <div className="w-8 flex justify-center">
-            <FontAwesomeIcon icon={faHouse} />
-          </div>
-          <p className="text-2xl">Home</p>
+          <Link to="/" className="flex gap-4">
+            <div className="w-8 flex justify-center">
+              <FontAwesomeIcon icon={faHouse} />
+            </div>
+            <p className="text-2xl">Home</p>
+          </Link>
         </div>
 
         <div className="cursor-pointer flex items-center gap-4 w-full">

@@ -32,21 +32,25 @@ export default function Post({
     }
   }, [text]);
 
-//* Alternatywna forma: 
-// PostProps) {
-//   const Router = useRouter();
-//   const longText = text.length > 500;
-//   const altText = longText ? text.slice(0, 500) : text;
-//   return (
+  //* Alternatywna forma:
+  // PostProps) {
+  //   const Router = useRouter();
+  //   const longText = text.length > 500;
+  //   const altText = longText ? text.slice(0, 500) : text;
+  //   return (
   return (
     <>
-      <div
-        className="bg-black w-[80vw] max-h-[60vh] md:w-2/3 flex flex-col py-5 border border-[#2F3336] rounded-2xl"
-        onClick={() => Router.navigate({ to: `/posts/${id}` })}
-      >
+      <div className="bg-black w-[80vw] overflow-y-auto md:w-2/3 flex flex-col py-5 border border-[#2F3336] rounded-2xl">
         <div className="h-[20%] flex justify-evenly items-center">
           <div className="bg-white rounded-full w-10 h-10"></div>
-          <p className="text-white">{username}</p>
+          <p
+            className="text-white"
+            onClick={() => {
+              Router.navigate({ to: `/users/${}` });
+            }}
+          >
+            {username}
+          </p>
           <p className="text-white opacity-60">{name}</p>
           <p className="text-white opacity-60">
             {date ? new Date(date).toLocaleDateString() : "brak daty"}
@@ -57,7 +61,13 @@ export default function Post({
           {longText ? (
             <>
               <p>
-                {altText} <span className="text-blue-400">Zobacz więcej</span>
+                {altText}{" "}
+                <span
+                  onClick={() => Router.navigate({ to: `/posts/${id}` })}
+                  className="text-blue-400 cursor-pointer"
+                >
+                  Zobacz więcej
+                </span>
               </p>
             </>
           ) : (
