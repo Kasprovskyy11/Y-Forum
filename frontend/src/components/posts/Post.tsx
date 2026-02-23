@@ -40,28 +40,31 @@ export default function Post({
   //   return (
   return (
     <>
-      <div className="bg-black w-[80vw] overflow-y-auto md:w-2/3 flex flex-col py-5 border border-[#2F3336] rounded-2xl">
+      <div className="bg-black w-[80vw] md:w-2/3 flex flex-col py-5 border border-[#2F3336] rounded-2xl">
         <div className="h-[20%] flex justify-evenly items-center">
-          <div className="bg-white rounded-full w-10 h-10"></div>
-          <p
-            className="text-white"
+          <div
+            className="bg-white rounded-full w-10 h-10 cursor-pointer"
             onClick={() => {
-              Router.navigate({ to: `/users/${}` });
+              Router.navigate({ to: `/users/${name}` });
             }}
-          >
-            {username}
-          </p>
+          ></div>
+          <p className="text-white">{username}</p>
           <p className="text-white opacity-60">{name}</p>
           <p className="text-white opacity-60">
             {date ? new Date(date).toLocaleDateString() : "brak daty"}
           </p>
           <p className="text-white opacity-60">...</p>
         </div>
-        <div className="min-h-[80%] text-white text-center py-5 px-2 lg:p-5">
+        <div
+          className="min-h-[80%] text-white text-center py-5 px-2 lg:p-5"
+          onClick={() => {
+            Router.navigate({ to: `/posts/${id}` });
+          }}
+        >
           {longText ? (
             <>
               <p>
-                {altText}{" "}
+                {altText}
                 <span
                   onClick={() => Router.navigate({ to: `/posts/${id}` })}
                   className="text-blue-400 cursor-pointer"
