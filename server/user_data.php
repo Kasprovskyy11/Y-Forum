@@ -41,23 +41,38 @@ if (!$user) {
     exit;
 }
 
-// ===== pobranie ID postów użytkownika =====
+// ===== pobranie postów użytkownika =====
 $stmt = $pdo->prepare("
-    SELECT id_p
-    FROM posts
-    WHERE name = ?
-    ORDER BY date DESC
+    SELECT 
+        p.id_p AS id,
+        p.text,
+        p.date,
+        p.likes,
+        p.temat,
+        i.path AS photo
+    FROM posts p
+    LEFT JOIN images i ON p.image_id = i.id_image
+    WHERE p.name = ?
+    ORDER BY p.date DESC
 ");
 
 $stmt->execute([$name]);
 
 $posts = [];
+
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $posts[] = [
-        "id" => (int)$row["id_p"]
+        "id" => (int)$row["id"],
+        "name" => $user["name"],                   // login autora
+        "username" => $user["username"],           // wyświetlana nazwa
+        "profilePhoto" => $user["profilowe"],      // profilowe autora
+        "date" => $row["date"],
+        "text" => $row["text"],
+        "photo" => $row["photo"],
+        "likes" => (int)$row["likes"],
+        "temat" => $row["temat"]
     ];
 }
-
 // ===== zwrot danych =====
 echo json_encode([
     "name" => $user["name"],
