@@ -45,33 +45,45 @@ function RouteComponent() {
   dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
     >
       <LeftPanel />
-      {error ? (
-        <p>Error</p>
-      ) : loading ? (
-        <p className="text-white">Loading</p>
-      ) : (
-        <div className="">
-          <div className="m-6 border border-[#2F3336] ">
-            <div>
-              <div className="w-16 h-16 lg:w-32 lg:h-32 rounded-full bg-white m-6"></div>
-            </div>
-            <div className="m-8 flex justify-start gap-8 lg:text-2xl items-center">
-              <p className="text-white">{userData?.username}</p>
-              <p className="text-white opacity-60">{userData?.name}</p>
-              <p className="text-white opacity-60 text-xl">
-                {userData?.birth_date}
-              </p>
-              <p className="text-white opacity-60 text-xl">
-                Total posts: {userPosts?.length}
-              </p>
+      <div className="flex flex-col overflow-y-auto items-center justify-evenly gap-4 w-full">
+        {error ? (
+          <p>Error</p>
+        ) : loading ? (
+          <p className="text-white">Loading</p>
+        ) : (
+          <div className="w-full">
+            <div className="m-6 border border-[#D9D9D9] rounded-2xl">
+              <div>
+                <div className="w-16 h-16 lg:w-32 lg:h-32 rounded-full bg-white m-6"></div>
+              </div>
+              <div className="m-8 flex justify-start gap-8 lg:text-2xl items-center">
+                <p className="text-white">{userData?.username}</p>
+                <p className="text-white opacity-60">{userData?.name}</p>
+                <p className="text-white opacity-60 text-xl">
+                  {userData?.birth_date}
+                </p>
+                <p className="text-white opacity-60 text-xl">
+                  Total posts: {userPosts?.length}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* {userPosts
-        ? userPosts.map((post) => <Post id={post.id} text={post.text} />)
-        : null} */}
+        {userPosts
+          ? userPosts.map((post) => (
+              <Post
+                id={post.id}
+                text={post.text}
+                name={post.name}
+                username={post.username}
+                likes={post.likes}
+                photo={post.photo}
+              />
+            ))
+          : null}
+      </div>
+
       <div className="fixed bottom-0 left-0 w-full lg:h-screen lg:overflow-y-auto lg:hidden">
         <LowerPanel />
       </div>
