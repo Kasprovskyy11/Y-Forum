@@ -71,7 +71,7 @@ function RouteComponent() {
 
       console.log("Odpowiedź serwera:", response.data);
 
-      if (response.data.success === true) {
+      if (response.data.success) {
         alert("Registration successful!");
         navigate({ to: "/login" });
       } else {
@@ -89,7 +89,7 @@ function RouteComponent() {
   };
 
   return (
-    <div className="w-screen h-screen bg-black flex justify-center items-center flex-col">
+    <div className="w-screen max-h-screen bg-black flex justify-center items-center flex-col">
       <div className="h-screen w-screen p-6 flex justify-center items-center flex-col gap-20 lg:w-[30vw] md:w-[50vh]">
         <img src={YLogo} className="scale-50 lg:scale-100" alt="Logo" />
         <h1 className="text-white font-bold text-3xl">Create an account</h1>

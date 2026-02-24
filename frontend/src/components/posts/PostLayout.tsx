@@ -36,7 +36,13 @@ export default function PostLayout({ search }: PostLayoutProps) {
   }, []);
 
   return (
-    <div className="flex-1 overflow-y-auto flex flex-col items-center md:w-full gap-6 p-6">
+    <div
+      className="flex-1 min-h-0 overflow-y-auto flex flex-col items-center md:w-full gap-6 p-6 [&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar-track]:bg-gray-100
+  [&::-webkit-scrollbar-thumb]:bg-gray-300
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+    >
       {search ? (
         posts
           .filter(

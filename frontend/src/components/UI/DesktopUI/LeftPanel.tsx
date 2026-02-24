@@ -2,18 +2,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import DeepSeek from "../../../assets/deepseek.png";
 import YLogo from "../../../assets/YLogo.png";
+import { Link, useRouter } from "@tanstack/react-router";
 
 export default function LeftPanel() {
+  const Router = useRouter();
+  const name = localStorage.getItem("user");
   return (
     <div className="h-full w-full border-r-2 border-[#D9D9D9] hidden lg:inline">
       <img src={YLogo} className="p-6 w-24" />
       <div className="flex flex-col justify-evenly items-start text-white text-3xl h-1/3 p-6">
-        <div className="cursor-pointer flex items-center gap-4 w-full">
+        <Link to="/" className="flex gap-4 w-full cursor-pointer">
           <div className="w-8 flex justify-center">
             <FontAwesomeIcon icon={faHouse} />
           </div>
           <p className="text-2xl">Home</p>
-        </div>
+        </Link>
 
         <div className="cursor-pointer flex items-center gap-4 w-full">
           <div className="w-8 flex justify-center">
@@ -33,7 +36,17 @@ export default function LeftPanel() {
           <p className="text-2xl">DeepSeek</p>
         </a>
       </div>
-      <div className="flex justify-center h-[40%] items-end">
+      <div className="flex flex-col justify-evenly items-center h-[40%] mt-[20%]">
+        <div
+          className="flex w-full items-center gap-2 cursor-pointer"
+          onClick={() => {
+            Router.navigate({ to: `/users/${name}` });
+          }}
+        >
+          <div className="w-16 h-16 rounded-full bg-white self-start ml-10"></div>
+          <p className="text-white text-xl">{name}</p>
+        </div>
+
         <button className="w-3/4 h-12 bg-white rounded-2xl cursor-pointer">
           Post
         </button>

@@ -29,14 +29,14 @@ function PostPage() {
   }, [post]);
 
   return (
-    <div className="flex flex-col h-screen items-center lg:grid lg:grid-cols-[1fr_4fr_0fr] ">
+    <div className="flex flex-col h-screen items-center lg:grid lg:grid-cols-[1fr_4fr_0fr]">
       <LeftPanel />
 
       {/* Middle column - scrollable */}
       <div className="h-screen overflow-y-auto text-white">
         <div className="m-6 border border-[#2F3336] min-h-[80vh]">
           <div className="border-b border-[#2F3336] flex flex-wrap items-center gap-4 p-4 lg:gap-20 lg:pl-10">
-            <div className="w-16 h-16 rounded-full bg-white flex-shrink-0"></div>
+            <div className="w-16 h-16 rounded-full bg-white shrink-0"></div>
             <p className="font-medium">{data?.username}</p>
             <p className="opacity-60">{data?.name}</p>
             <p className="opacity-60">{data?.date}</p>
@@ -48,7 +48,7 @@ function PostPage() {
       </div>
 
       {/* Right panel - fixed */}
-      <div className="h-screen overflow-y-auto">
+      <div className="lg:h-screen lg:overflow-y-auto w-full">
         <LowerPanel />
       </div>
     </div>

@@ -23,7 +23,13 @@ function Index() {
   }, [Router]);
 
   return (
-    <div className="flex flex-col h-screen items-center lg:grid lg:grid-cols-[1fr_3fr_1fr]">
+    <div
+      className="flex flex-col h-screen items-center lg:grid lg:grid-cols-[1fr_3fr_1fr]  [&::-webkit-scrollbar]:w-2
+      [&::-webkit-scrollbar-track]:bg-gray-100
+      [&::-webkit-scrollbar-thumb]:bg-gray-300
+      dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+      dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+    >
       <LeftPanel />
       <div className="w-full flex flex-col h-screen items-center">
         <MobileMain />
