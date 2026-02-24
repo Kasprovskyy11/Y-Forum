@@ -83,6 +83,7 @@ function RouteComponent() {
                 likes={post.likes}
                 photo={post.photo}
                 profilePhoto={post.profilePhoto}
+                date={post.date}
               />
             ))
           : null}
