@@ -36,10 +36,13 @@ function PostPage() {
       <div className="h-screen overflow-y-auto text-white">
         <div className="m-6 border border-[#2F3336] min-h-[80vh]">
           <div className="border-b border-[#2F3336] flex flex-wrap items-center gap-4 p-4 lg:gap-20 lg:pl-10">
-            <div className="w-16 h-16 rounded-full bg-white shrink-0"></div>
+            <img
+              src={`http://localhost/${data?.profilePhoto}`}
+              className="w-16 h-16 rounded-full shrink-0"
+            />
             <p className="font-medium">{data?.username}</p>
             <p className="opacity-60">{data?.name}</p>
-            <p className="opacity-60">{data?.date}</p>
+            <p className="opacity-60">{data?.date.toString()}</p>
           </div>
           <div className="p-4 lg:p-12">
             <p className="whitespace-pre-wrap">{data?.text}</p>

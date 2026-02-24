@@ -54,7 +54,10 @@ function RouteComponent() {
           <div className="w-full">
             <div className="m-6 border border-[#D9D9D9] rounded-2xl">
               <div>
-                <div className="w-16 h-16 lg:w-32 lg:h-32 rounded-full bg-white m-6"></div>
+                <img
+                  src={`http://localhost/${userData?.profilePicture}`}
+                  className="w-16 h-16 lg:w-32 lg:h-32 rounded-full m-6"
+                />
               </div>
               <div className="m-8 flex justify-start gap-8 lg:text-2xl items-center">
                 <p className="text-white">{userData?.username}</p>
@@ -79,6 +82,7 @@ function RouteComponent() {
                 username={post.username}
                 likes={post.likes}
                 photo={post.photo}
+                profilePhoto={post.profilePhoto}
               />
             ))
           : null}

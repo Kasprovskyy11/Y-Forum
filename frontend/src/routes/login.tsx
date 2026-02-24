@@ -4,6 +4,9 @@ import CustomButton from "../components/forms/CustomButton";
 import YLogo from "../assets/YLogo.png";
 import { loginHandler, type LoginInterface } from "../services/loginService";
 import { useEffect, useState } from "react";
+import { getUserData } from "../services/getUserDataService";
+import { useUser } from "../contexts/userContext";
+import type { User } from "../contexts/userContext";
 
 export const Route = createFileRoute("/login")({
   component: RouteComponent,
@@ -14,6 +17,8 @@ function RouteComponent() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const { setUser } = useUser();
   // useEffect(() => {}, []);
 
   useEffect(() => {
@@ -28,6 +33,17 @@ function RouteComponent() {
       console.log(data);
       if (data.success === 1) {
         localStorage.setItem("user", login);
+        const userDataRaw = await getUserData(login);
+        console.log(userDataRaw);
+        const userData: User = {
+          name: userDataRaw.name,
+          username: userDataRaw.username,
+          email: "", // jeśli backend nie zwraca emaila, na razie puste
+          profilePhoto: userDataRaw.profilePicture,
+          birthDate: userDataRaw.birth_date,
+        };
+        console.log(userData);
+        setUser(userData);
         Router.navigate({ to: "/" });
       } else {
         setError("Błąd logowania, spróuj ponownie");

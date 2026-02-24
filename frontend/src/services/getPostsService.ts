@@ -1,4 +1,5 @@
 import axios from "axios";
+import config from "../config.json";
 
 export interface postInterface {
   id: number;
@@ -6,13 +7,14 @@ export interface postInterface {
   username: string;
   text: string;
   photo: string;
+  profilePhoto: string;
   date: string; // ← zmień z Date na string
   likes: number;
 }
 
 export const getPosts = async (): Promise<postInterface[]> => {
   const response = await axios.get<postInterface[]>(
-    "http://localhost/getPosts.php",
+    `http://${config.path}/getPosts.php`,
   );
   return response.data;
 };

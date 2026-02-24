@@ -5,6 +5,7 @@ import YLogo from "../assets/YLogo.png";
 import ProfilePhoto from "../assets/profile.png";
 import { useState, useRef } from "react";
 import axios from "axios"; // dodaj axios
+import config from "../config.json";
 
 export const Route = createFileRoute("/register")({
   component: RouteComponent,
@@ -39,52 +40,31 @@ function RouteComponent() {
 
   const handleRegister = async () => {
     try {
-      // Sprawdź czy dane są prawidłowe
-      console.log("Wysyłane dane:", {
-        email,
-        password: password ? "***" : null,
-        birth_date: birthDate,
-        name,
-        username,
-      });
-
       const formData = new FormData();
       formData.append("email", email);
       formData.append("password", password);
-      formData.append("birth_date", birthDate); // upewnij się że nazwa to "birth_date"
+      formData.append("birth_date", birthDate);
       formData.append("name", name); // wyświetlana nazwa
       formData.append("username", username); // login
-
-      if (photo) {
-        formData.append("photo", photo);
-      }
+      if (photo) formData.append("profilowe", photo);
 
       const response = await axios.post(
-        "http://localhost/rejstracja.php",
+        `http://${config.path}/rejstracja.php`,
         formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        },
       );
 
-      console.log("Odpowiedź serwera:", response.data);
-
       if (response.data.success) {
+        // 🔥 tutaj zapis do localStorage
+        // jeśli backend zwróci ścieżkę do zdjęcia, użyj jej; jeśli nie, fallback
+
         alert("Registration successful!");
         navigate({ to: "/login" });
       } else {
         alert(response.data.error || "Registration failed");
       }
     } catch (error) {
-      console.error("Registration error:", error);
-      if (axios.isAxiosError(error) && error.response) {
-        console.log("Dane błędu:", error.response.data);
-        alert(`Error: ${error.response.data.error || "Unknown error"}`);
-      } else {
-        alert("Network error - check if server is running");
-      }
+      console.error(error);
+      alert("Network error - check if server is running");
     }
   };
 
@@ -153,6 +133,7 @@ function RouteComponent() {
                     accept="image/*"
                     onChange={handleFileChange}
                     ref={fileInputRef}
+                    name="profilowe"
                     className="text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-600"
                   />
                 </label>
