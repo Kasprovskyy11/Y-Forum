@@ -35,5 +35,5 @@ Components:
       - Tabs.tsx -> "For you" and "Followed" tabs (used in desktop and mobile)
       - LowerPanel.tsx -> Panel displayed as footer on mobile devices
 
-  Contexts:
-    - userContext.tsx -> Context storing user data after fetching it in LoginPage
+Contexts:
+  - userContext.tsx -> Context storing user data after fetching it in LoginPage
