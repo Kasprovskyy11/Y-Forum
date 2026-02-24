@@ -4,7 +4,6 @@ header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: POST");
 header("Content-Type: application/json");
 
-// ====== konfiguracja bazy ======
 include 'dane_do_bazy.php';
 
 try {
@@ -13,58 +12,68 @@ try {
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]);
 } catch (Exception $e) {
-    echo json_encode(["success" => 0]);
+    echo json_encode(["success" => false, "error" => "DB connection failed"]);
     exit;
 }
 
-// ====== dane z Reacta ======
-$data = json_decode(file_get_contents("php://input"), true);
+/* ====== DANE Z FORMDATA ====== */
+$email      = $_POST['email'] ?? '';
+$password   = $_POST['password'] ?? '';
+$birthDate  = $_POST['birth_date'] ?? '';
+$name       = $_POST['name'] ?? '';       // display name
+$username   = $_POST['username'] ?? '';   // login
 
-$email       = $data["email"] ?? "";
-$password    = $data["password"] ?? "";
-$birthDate   = $data["birthDate"] ?? "";
-$login       = $data["login"] ?? "";         // to idzie do kolumny name
-$displayName = $data["displayName"] ?? "";   // to idzie do kolumny username
-
-// ====== walidacja ======
-if (!$email || !$password || !$birthDate || !$login || !$displayName) {
-    echo json_encode(["success" => 0]);
+if (!$email || !$password || !$birthDate || !$name || !$username) {
+    echo json_encode(["success" => false, "error" => "Missing fields"]);
     exit;
 }
 
-// ====== sprawdzenie czy login lub email już istnieje ======
+/* ====== SPRAWDZENIE CZY ISTNIEJE ====== */
 $stmt = $pdo->prepare("
     SELECT name FROM users
     WHERE name = ? OR email = ?
     LIMIT 1
 ");
-$stmt->execute([$login, $email]);
+$stmt->execute([$username, $email]);
 
 if ($stmt->fetch()) {
-    echo json_encode(["success" => 0]); // użytkownik istnieje
+    echo json_encode(["success" => false, "error" => "User already exists"]);
     exit;
 }
 
-// ====== hash hasła ======
+/* ====== HASŁO ====== */
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-// ====== dodanie użytkownika ======
+/* ====== ZDJĘCIE (opcjonalne) ====== */
+$photoPath = "/";
+if (!empty($_FILES['profilowe']['name'])) {
+    $uploadDir = "uploads/";
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+
+    $fileName = uniqid() . "_" . basename($_FILES['profilowe']['name']);
+    $target = $uploadDir . $fileName;
+
+    if (move_uploaded_file($_FILES['profilowe']['tmp_name'], $target)) {
+        $photoPath = $target;
+    }
+}
+
+/* ====== INSERT ====== */
 $stmt = $pdo->prepare("
     INSERT INTO users
-    (name, username, email, passworld, birth_date, register_date, is_admin)
-    VALUES (?, ?, ?, ?, ?, CURDATE(), 0)
+    (name, username, email, password, birth_date, profilowe, register_date, is_admin)
+    VALUES (?, ?, ?, ?, ?, ?, CURDATE(), 0)
 ");
 
 $success = $stmt->execute([
-    $login,        // name = login
-    $displayName,  // username = wyświetlana nazwa
+    $name,
+    $username,
     $email,
     $hashedPassword,
-    $birthDate
+    $birthDate,
+    $photoPath
 ]);
 
-if ($success) {
-    echo json_encode(["success" => 1]);
-} else {
-    echo json_encode(["success" => 0]);
-}
+echo json_encode(["success" => $success]);
