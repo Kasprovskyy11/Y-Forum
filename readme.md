@@ -1,7 +1,7 @@
 # Y forum
 Inspired by X
 
-## Team and roles
+## Team and roles:
 Kacper Banucha - Frontend
 Piotr Jarocha - Backend
 Kamil Gałek - Full stack observer
