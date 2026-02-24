@@ -1,6 +1,11 @@
 # Y forum
 Inspired by X
 
+## Team and roles
+Kacper Banucha - Frontend
+Piotr Jarocha - Backend
+Kamil Gałek - Full stack observer
+
 ## Technologies
 - React used with Typescript (for frontend):
   Used with: Tanstack Router, TailwindCSS
