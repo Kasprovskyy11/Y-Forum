@@ -45,18 +45,24 @@ if ($stmt->fetch()) {
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 /* ====== ZDJĘCIE (opcjonalne) ====== */
-$photoPath = "/";
+$photoPath = null; // jebane null, żeby nie wpierdoliło DB jeśli brak zdjęcia
 if (!empty($_FILES['profilowe']['name'])) {
-    $uploadDir = "uploads/";
+    $uploadDir = "uploads/";  // folder gdzie będą zdjęcia
     if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0777, true);
+        mkdir($uploadDir, 0777, true); // tworzymy folder jak nie ma
     }
 
-    $fileName = uniqid() . "_" . basename($_FILES['profilowe']['name']);
+    // Pobieramy rozszerzenie pliku
+    $ext = pathinfo($_FILES['profilowe']['name'], PATHINFO_EXTENSION);
+
+    // Tworzymy nazwę pliku taka jak login użytkownika + oryginalne rozszerzenie
+    $fileName = $name . '.' . $ext;
+
     $target = $uploadDir . $fileName;
 
+    // Zapis pliku na serwerze
     if (move_uploaded_file($_FILES['profilowe']['tmp_name'], $target)) {
-        $photoPath = $target;
+        $photoPath = $target; // jebane path do DB
     }
 }
 
@@ -68,8 +74,8 @@ $stmt = $pdo->prepare("
 ");
 
 $success = $stmt->execute([
-    $name,
-    $username,
+    $name,        // unikalny login
+    $username,    // wyświetlana nazwa
     $email,
     $hashedPassword,
     $birthDate,

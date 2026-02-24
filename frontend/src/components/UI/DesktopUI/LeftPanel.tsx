@@ -3,10 +3,13 @@ import { faHouse, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import DeepSeek from "../../../assets/deepseek.png";
 import YLogo from "../../../assets/YLogo.png";
 import { Link, useRouter } from "@tanstack/react-router";
+import { useUser } from "../../../contexts/userContext";
 
 export default function LeftPanel() {
   const Router = useRouter();
-  const name = localStorage.getItem("user");
+  const { user } = useUser();
+  const name = user?.name;
+  const profilePhoto = user?.profilePhoto;
   return (
     <div className="h-full w-full border-r-2 border-[#D9D9D9] hidden lg:inline">
       <img src={YLogo} className="p-6 w-24" />
@@ -36,6 +39,7 @@ export default function LeftPanel() {
           <p className="text-2xl">DeepSeek</p>
         </a>
       </div>
+
       <div className="flex flex-col justify-evenly items-center h-[40%] mt-[20%]">
         <div
           className="flex w-full items-center gap-2 cursor-pointer"
@@ -43,8 +47,12 @@ export default function LeftPanel() {
             Router.navigate({ to: `/users/${name}` });
           }}
         >
-          <div className="w-16 h-16 rounded-full bg-white self-start ml-10"></div>
-          <p className="text-white text-xl">{name}</p>
+          <img
+            src={`http://localhost/${profilePhoto}`} // teraz bierze faktyczne profilowe
+            className="w-16 h-16 rounded-full self-start ml-10"
+            alt="Profile"
+          />
+          <p className="text-white text-md">{name}</p>
         </div>
 
         <button className="w-3/4 h-12 bg-white rounded-2xl cursor-pointer">

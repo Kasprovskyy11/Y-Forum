@@ -59,6 +59,7 @@ export default function PostLayout({ search }: PostLayoutProps) {
               username={post.username}
               text={post.text}
               photo={post.photo}
+              profilePhoto={post.profilePhoto}
               likes={post.likes}
               date={post.date}
             />
@@ -74,6 +75,7 @@ export default function PostLayout({ search }: PostLayoutProps) {
             username={post.username}
             text={post.text}
             photo={post.photo}
+            profilePhoto={post.profilePhoto}
             likes={post.likes}
             date={post.date}
           />

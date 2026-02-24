@@ -1,5 +1,6 @@
 // services/getPostDataService.ts
 import axios from "axios";
+import config from "../config.json";
 
 export interface PostData {
   id: number;
@@ -9,12 +10,13 @@ export interface PostData {
   photo: string;
   date: string; // ← zmień z Date na string
   likes: number;
+  profilePhoto: string;
 }
 
 export const getPostData = async (postId: string): Promise<PostData> => {
   const id = parseInt(postId, 10);
   const response = await axios.post<PostData>(
-    "http://localhost/dane_posta.php",
+    `http://${config.path}/dane_posta.php`,
     { id: id }, // wysyłamy ID w body
   );
   return response.data;

@@ -1,5 +1,6 @@
 import axios from "axios";
 import type { postInterface } from "./getPostsService";
+import config from "../config.json";
 
 export interface UserData {
   name: string;
@@ -11,7 +12,7 @@ export interface UserData {
 
 export const getUserData = async (user: string): Promise<UserData> => {
   const response = await axios.post<UserData>(
-    "http://localhost/user_data.php",
+    `http://${config.path}/user_data.php`,
     {
       name: user,
     },
