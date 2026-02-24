@@ -6,6 +6,7 @@ import type { UserData } from "../../services/getUserDataService.ts";
 import Post from "../../components/posts/Post";
 import LowerPanel from "../../components/UI/MobileUIComponents/LowerPanel.tsx";
 import LeftPanel from "../../components/UI/DesktopUI/LeftPanel.tsx";
+import config from "../../config.json";
 
 export const Route = createFileRoute("/users/$user")({
   component: RouteComponent,
@@ -55,8 +56,8 @@ function RouteComponent() {
             <div className="m-6 border border-[#D9D9D9] rounded-2xl">
               <div>
                 <img
-                  src={`http://localhost/${userData?.profilePicture}`}
-                  className="w-16 h-16 lg:w-32 lg:h-32 rounded-full m-6"
+                  src={`http://${config.path}/${userData?.profilePicture}`}
+                  className="w-16 h-16 lg:w-32 lg:h-32 rounded-full m-6 border border-[#D9D9D9]"
                 />
               </div>
               <div className="m-8 flex justify-start gap-8 lg:text-2xl items-center">

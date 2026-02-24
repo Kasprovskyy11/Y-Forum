@@ -1,5 +1,6 @@
 import { useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import config from "../../config.json";
 
 interface PostProps {
   id: number;
@@ -8,8 +9,8 @@ interface PostProps {
   date?: string;
   text: string;
   profilePhoto?: string;
-  photo: string;
-  likes: number;
+  photo?: string;
+  likes?: number;
 }
 
 export default function Post({
@@ -18,9 +19,7 @@ export default function Post({
   username,
   date,
   text,
-  photo,
   profilePhoto,
-  likes,
 }: PostProps) {
   const [longText, setLongText] = useState(false);
   const [altText, setAltText] = useState("");
@@ -44,8 +43,8 @@ export default function Post({
       <div className="bg-black w-[80vw] md:w-2/3 flex flex-col py-5 border border-[#2F3336] rounded-2xl">
         <div className="h-[20%] flex justify-evenly items-center">
           <img
-            src={`http://localhost/${profilePhoto}` || undefined}
-            className="rounded-full w-10 h-10 cursor-pointer"
+            src={`http://${config.path}/${profilePhoto}`}
+            className="rounded-full w-10 h-10 cursor-pointer border border-[#D9D9D9]"
             onClick={() => {
               Router.navigate({ to: `/users/${name}` });
             }}

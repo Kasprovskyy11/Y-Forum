@@ -2,13 +2,14 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
-export interface UserData {
-  name: string;
-  username: string;
-  profilePicture: string;
-  birth_date: string;
-  posts: postInterface[];
-}
+export type User = {
+  name: string; // unikalny login
+  username: string; // wyświetlana nazwa
+  email: string;
+  profilePhoto: string; // ścieżka do profilowego
+  birthDate: string;
+  isAdmin?: boolean;
+};
 
 type UserContextType = {
   user: User | null;
