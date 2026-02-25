@@ -93,7 +93,7 @@ export default function Post({
         {/* Zdjęcie */}
         {photo && photo !== "null" && photo !== "/" && (
           <div
-            className="mb-3 rounded-2xl border border-[#2F3336] overflow-hidden flex items-center justify-center bg-black w-full pt-6 pb-2 px-2"
+            className="mb-3 rounded-2xl border border-[#2F3336] overflow-hidden flex items-center justify-center bg-black w-full pt-6 pb-3 px-3"
             onClick={() => Router.navigate({ to: `/posts/${id}` })}
           >
             <img
@@ -104,7 +104,7 @@ export default function Post({
                 e.stopPropagation();
                 setShowLightbox(true);
               }}
-              className="max-w-full max-h-[450px] object-contain cursor-pointer rounded-lg"
+              className="w-auto h-auto max-w-[calc(100%-24px)] max-h-[600px] object-contain cursor-pointer rounded-lg"
             />
           </div>
 
