@@ -37,7 +37,7 @@ export default function Post({
 
   return (
     <>
-      <div className="bg-black w-[95vw] sm:w-[90vw] md:w-[75vw] lg:w-2/3 max-w-2xl flex flex-col border border-[#2F3336] rounded-2xl overflow-hidden hover:bg-[#080808] transition-colors duration-200 cursor-pointer">
+      <div className="bg-black w-[95vw] sm:w-[90vw] md:w-[75vw] lg:w-2/3 max-w-2xl flex flex-col border border-[#2F3336] rounded-2xl hover:bg-[#080808] transition-colors duration-200 cursor-pointer">
         {/* Header */}
         <div className="flex items-center gap-3 px-4 pt-4 pb-2">
           <img
