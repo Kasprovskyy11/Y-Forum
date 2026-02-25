@@ -37,9 +37,9 @@ export default function Post({
 
   return (
     <>
-      <div className="bg-black w-[80vw] md:w-2/3 flex flex-col h-screen border border-[#2F3336] rounded-2xl overflow-hidden hover:bg-[#080808] transition-colors duration-200 cursor-pointer h-auto">
+      <div className="bg-black w-[95vw] sm:w-[90vw] md:w-[75vw] lg:w-2/3 max-w-2xl flex flex-col border border-[#2F3336] rounded-2xl overflow-hidden hover:bg-[#080808] transition-colors duration-200 cursor-pointer">
         {/* Header */}
-        <div className="flex items-center gap-3 px-4 pt-4 pb-2 h-screen">
+        <div className="flex items-center gap-3 px-4 pt-4 pb-2">
           <img
             src={`http://localhost/${profilePhoto}` || undefined}
             className="rounded-full w-10 h-10 cursor-pointer flex-shrink-0 object-cover ring-2 ring-transparent hover:ring-[#1D9BF0] transition-all"
@@ -93,7 +93,7 @@ export default function Post({
         {/* Zdjęcie */}
         {photo && photo !== "null" && photo !== "/" && (
           <div
-            className="mx-4 mb-3 rounded-2xl border border-[#2F3336] overflow-hidden h-screen flex items-center justify-center bg-black"
+            className="mb-3 rounded-2xl border border-[#2F3336] overflow-hidden flex items-center justify-center bg-black w-full pt-6 pb-2 px-2"
             onClick={() => Router.navigate({ to: `/posts/${id}` })}
           >
             <img
@@ -104,7 +104,7 @@ export default function Post({
                 e.stopPropagation();
                 setShowLightbox(true);
               }}
-              className="w-full object-contain cursor-pointer"
+              className="max-w-full max-h-[450px] object-contain cursor-pointer rounded-lg"
             />
           </div>
 
