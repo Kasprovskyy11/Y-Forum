@@ -47,6 +47,7 @@ function PostPage() {
           <div className="p-4 lg:p-12">
             <p className="whitespace-pre-wrap">{data?.text}</p>
           </div>
+          {/* <img sr /> */}
         </div>
       </div>
 
