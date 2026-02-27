@@ -55,7 +55,10 @@ export default function LeftPanel() {
           <p className="text-white text-md">{name}</p>
         </div>
 
-        <button className="w-3/4 h-12 bg-white rounded-2xl cursor-pointer">
+        <button
+          className="w-3/4 h-12 bg-white rounded-2xl cursor-pointer"
+          onClick={() => Router.navigate({ to: "/addPost" })}
+        >
           Post
         </button>
       </div>
