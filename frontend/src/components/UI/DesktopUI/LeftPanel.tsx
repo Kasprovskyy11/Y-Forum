@@ -9,7 +9,7 @@ export default function LeftPanel() {
   const Router = useRouter();
   const { user } = useUser();
   const name = user?.name;
-  const profilePhoto = user?.profilePhoto;
+  const profilePhoto = user?.profilePicture;
   return (
     <div className="h-full w-full border-r-2 border-[#D9D9D9] hidden lg:inline">
       <img src={YLogo} className="p-6 w-24" />

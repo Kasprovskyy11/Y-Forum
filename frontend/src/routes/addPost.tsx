@@ -17,7 +17,7 @@ function RouteComponent() {
   const [showTematInput, setShowTematInput] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { user } = useUser();
-  const name = user?.name;
+  const name = user?.name ?? null;
   const charsLeft = 280 - postText.length;
 
   const handlePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
