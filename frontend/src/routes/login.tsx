@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { getUserData } from "../services/getUserDataService";
 import { useUser } from "../contexts/userContext";
 import type { UserData } from "../contexts/userContext";
-import { getPosts } from "../services/getPostsService";
 
 export const Route = createFileRoute("/login")({
   component: RouteComponent,
