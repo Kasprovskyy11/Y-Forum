@@ -25,7 +25,6 @@ export default function Post({
 }: PostProps) {
   const [longText, setLongText] = useState(false);
   const [altText, setAltText] = useState("");
-  const [showLightbox, setShowLightbox] = useState(false);
   const Router = useRouter();
 
   useEffect(() => {
@@ -102,7 +101,6 @@ export default function Post({
               loading="lazy"
               onClick={(e) => {
                 e.stopPropagation();
-                setShowLightbox(true);
               }}
               className="w-auto h-auto max-w-[calc(100%-24px)] max-h-[600px] object-contain cursor-pointer rounded-lg"
             />

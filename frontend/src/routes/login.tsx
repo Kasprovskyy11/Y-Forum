@@ -6,7 +6,8 @@ import { loginHandler, type LoginInterface } from "../services/loginService";
 import { useEffect, useState } from "react";
 import { getUserData } from "../services/getUserDataService";
 import { useUser } from "../contexts/userContext";
-import type { User } from "../contexts/userContext";
+import type { UserData } from "../contexts/userContext";
+import { getPosts } from "../services/getPostsService";
 
 export const Route = createFileRoute("/login")({
   component: RouteComponent,
@@ -35,12 +36,12 @@ function RouteComponent() {
         localStorage.setItem("user", login);
         const userDataRaw = await getUserData(login);
         console.log(userDataRaw);
-        const userData: User = {
+        const userData: UserData = {
           name: userDataRaw.name,
           username: userDataRaw.username,
-          email: "", // jeśli backend nie zwraca emaila, na razie puste
-          profilePhoto: userDataRaw.profilePicture,
-          birthDate: userDataRaw.birth_date,
+          profilePicture: userDataRaw.profilePicture,
+          birth_date: userDataRaw.birth_date,
+          posts: [],
         };
         console.log(userData);
         setUser(userData);
