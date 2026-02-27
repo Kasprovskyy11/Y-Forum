@@ -16,7 +16,7 @@ export interface PostData {
 export const getPostData = async (postId: string): Promise<PostData> => {
   const id = parseInt(postId, 10);
   const response = await axios.post<PostData>(
-    `http://${config.path}/dane_posta.php`,
+    `${config.path}/dane_posta.php`,
     { id: id }, // wysyłamy ID w body
   );
   return response.data;

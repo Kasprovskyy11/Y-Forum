@@ -49,7 +49,7 @@ function RouteComponent() {
       if (photo) formData.append("profilowe", photo);
 
       const response = await axios.post(
-        `http://${config.path}/rejstracja.php`,
+        `${config.path}/rejstracja.php`,
         formData,
       );
 

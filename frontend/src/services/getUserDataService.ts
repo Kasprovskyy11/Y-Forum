@@ -11,11 +11,8 @@ export interface UserData {
 }
 
 export const getUserData = async (user: string): Promise<UserData> => {
-  const response = await axios.post<UserData>(
-    `http://${config.path}/user_data.php`,
-    {
-      name: user,
-    },
-  );
+  const response = await axios.post<UserData>(`${config.path}/user_data.php`, {
+    name: user,
+  });
   return response.data;
 };

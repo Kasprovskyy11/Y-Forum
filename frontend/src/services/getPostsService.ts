@@ -14,7 +14,7 @@ export interface postInterface {
 
 export const getPosts = async (): Promise<postInterface[]> => {
   const response = await axios.get<postInterface[]>(
-    `http://${config.path}/getPosts.php`,
+    `${config.path}/getPosts.php`,
   );
   return response.data;
 };

@@ -8,7 +8,7 @@ export interface LoginInterface {
 
 export const loginHandler = async (login: string, password: string) => {
   const response = await axios.post<LoginInterface>(
-    `http://${config.path}/logowanie.php`,
+    `${config.path}/logowanie.php`,
     { login, password },
   );
   return response.data;

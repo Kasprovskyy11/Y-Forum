@@ -14,7 +14,7 @@ export const addPost = async ({
   temat,
   text,
 }: AddPostInterface) => {
-  const url = `http://${config.path}/addPosts.php`;
+  const url = `${config.path}/addPosts.php`;
 
   const form = new FormData();
   form.append("name", name || "");
