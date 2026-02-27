@@ -40,7 +40,7 @@ export default function Post({
         {/* Header */}
         <div className="flex items-center gap-3 px-4 pt-4 pb-2">
           <img
-            src={`http://localhost/${profilePhoto}` || undefined}
+            src={`${config.path}/${profilePhoto}` || undefined}
             className="rounded-full w-10 h-10 cursor-pointer flex-shrink-0 object-cover ring-2 ring-transparent hover:ring-[#1D9BF0] transition-all"
             onClick={(e) => {
               e.stopPropagation();
@@ -96,7 +96,7 @@ export default function Post({
             onClick={() => Router.navigate({ to: `/posts/${id}` })}
           >
             <img
-              src={`http://${config.path}/${photo}`}
+              src={`${config.path}/${photo}`}
               alt={altText || "post photo"}
               loading="lazy"
               onClick={(e) => {
@@ -105,19 +105,6 @@ export default function Post({
               className="w-auto h-auto max-w-[calc(100%-24px)] max-h-[600px] object-contain cursor-pointer rounded-lg"
             />
           </div>
-
-          // {showLightbox && (
-          //   <div
-          //     className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
-          //     onClick={() => setShowLightbox(false)}
-          //   >
-          //     <img
-          //       src={`http://${config.path}/${photo}`}
-          //       alt={altText || "post photo"}
-          //       className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-lg"
-          //     />
-          //   </div>
-          // )}
         )}
 
         {/* Footer — lajki */}

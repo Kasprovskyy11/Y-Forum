@@ -37,7 +37,7 @@ function PostPage() {
         <div className="m-6 border border-[#2F3336] min-h-[80vh]">
           <div className="border-b border-[#2F3336] flex flex-wrap items-center gap-4 p-4 lg:gap-20 lg:pl-10">
             <img
-              src={`http://localhost/${data?.profilePhoto}`}
+              src={`localhost/${data?.profilePhoto}`}
               className="w-16 h-16 rounded-full shrink-0"
             />
             <p className="font-medium">{data?.username}</p>

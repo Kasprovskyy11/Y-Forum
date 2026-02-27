@@ -4,6 +4,7 @@ import DeepSeek from "../../../assets/deepseek.png";
 import YLogo from "../../../assets/YLogo.png";
 import { Link, useRouter } from "@tanstack/react-router";
 import { useUser } from "../../../contexts/userContext";
+import config from "../../../config.json";
 
 export default function LeftPanel() {
   const Router = useRouter();
@@ -48,7 +49,7 @@ export default function LeftPanel() {
           }}
         >
           <img
-            src={`http://localhost/${profilePhoto}`} // teraz bierze faktyczne profilowe
+            src={`${config.path}/${profilePhoto}`} // teraz bierze faktyczne profilowe
             className="w-16 h-16 rounded-full self-start ml-10"
             alt="Profile"
           />

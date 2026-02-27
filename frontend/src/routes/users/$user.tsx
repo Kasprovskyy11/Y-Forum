@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import type { postInterface } from "../../services/getPostsService";
 import { getUserData } from "../../services/getUserDataService.ts";
@@ -6,6 +6,8 @@ import type { UserData } from "../../services/getUserDataService.ts";
 import Post from "../../components/posts/Post";
 import LowerPanel from "../../components/UI/MobileUIComponents/LowerPanel.tsx";
 import LeftPanel from "../../components/UI/DesktopUI/LeftPanel.tsx";
+import { useUser } from "../../contexts/userContext.tsx";
+import config from "../../config.json";
 
 export const Route = createFileRoute("/users/$user")({
   component: RouteComponent,
@@ -17,6 +19,8 @@ function RouteComponent() {
   const [userPosts, setUserPosts] = useState<postInterface[]>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const Router = useRouter();
+  const loggedUser = useUser();
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -36,6 +40,13 @@ function RouteComponent() {
     console.log(userData);
     console.log(userPosts);
   }, [userData, userPosts]);
+
+  const handleLogout = () => {
+    loggedUser.setUser(null);
+    localStorage.clear();
+    Router.navigate({ to: "/login" });
+  };
+
   return (
     <div
       className="lg:grid lg:grid-cols-[1fr_4fr_0fr] h-screen [&::-webkit-scrollbar]:w-2
@@ -55,7 +66,7 @@ function RouteComponent() {
             <div className="m-6 border border-[#D9D9D9] rounded-2xl">
               <div>
                 <img
-                  src={`http://localhost/${userData?.profilePicture}`}
+                  src={`${config.path}/${userData?.profilePicture}`}
                   className="w-16 h-16 lg:w-32 lg:h-32 rounded-full m-6"
                 />
               </div>
@@ -68,6 +79,16 @@ function RouteComponent() {
                 <p className="text-white opacity-60 text-xl">
                   Total posts: {userPosts?.length}
                 </p>
+              </div>
+              <div>
+                {loggedUser?.user?.name === user && (
+                  <button
+                    className="w-1/4 h-12 bg-red-600 rounded-2xl m-6 text-white"
+                    onClick={handleLogout}
+                  >
+                    Wyloguj się
+                  </button>
+                )}
               </div>
             </div>
           </div>
