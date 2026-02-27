@@ -97,7 +97,16 @@ function RouteComponent() {
               />
             </div>
             <div className="w-full flex flex-col justify-center items-center gap-5">
-              <CustomButton text="Next" onClickFunction={() => setStage(1)} />
+              <CustomButton
+                text="Next"
+                onClickFunction={() => setStage(1)}
+                disabled={
+                  password.length < 8 ||
+                  !email.includes("@") ||
+                  !email.includes(".") ||
+                  !birthDate
+                }
+              />
               <Link to="/login" className="text-blue-500 hover:text-blue-600">
                 I have an account
               </Link>
@@ -140,7 +149,11 @@ function RouteComponent() {
               </div>
             </div>
             <div className="w-full flex flex-col justify-center items-center gap-5">
-              <CustomButton text="Register" onClickFunction={handleRegister} />
+              <CustomButton
+                text="Register"
+                onClickFunction={handleRegister}
+                disabled={username.length == 0 || name.length == 0}
+              />
               <Link to="/login" className="text-blue-500 hover:text-blue-600">
                 I have an account
               </Link>

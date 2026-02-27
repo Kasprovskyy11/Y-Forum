@@ -18,6 +18,7 @@ export default function CustomInput({
       type={type}
       placeholder={placeholder}
       maxLength={32}
+      minLength={8}
       onChange={onChangeFunction}
       value={value}
       className="border-2 border-[#868686] outline-none text-white text-center w-full h-12 rounded-md"
